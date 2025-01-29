@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://i.pinimg.com/736x/fe/93/92/fe93922bfed5c936968495c3627789b8.jpg') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        .calculator {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            text-align: center;
+        }
+
+        #display {
+            width: 100%;
+            height: 40px;
+            font-size: 24px;
+            text-align: right;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 20px;
+            font-size: 18px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            color: #333;
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .calculator {
+                width: 80%;
+                padding: 10px;
+            }
+
+            #display {
+                font-size: 20px;
+            }
+
+            .btn {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
+
+        /* Styling for your name in red neon cursive font without bold */
+        .neon-text {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'Pacifico', cursive;
+            font-size: 18px;
+            color: #FF0000; /* Neon red color */
+            text-shadow: 0 0 3px #FF0000, 0 0 5px #FF0000, 0 0 8px #FF0000, 0 0 12px #FF0000;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <!-- Cursive font -->
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button class="btn" onclick="appendNumber(7)">7</button>
+            <button class="btn" onclick="appendNumber(8)">8</button>
+            <button class="btn" onclick="appendNumber(9)">9</button>
+            <button class="btn" onclick="appendOperator('+')">+</button>
+
+            <button class="btn" onclick="appendNumber(4)">4</button>
+            <button class="btn" onclick="appendNumber(5)">5</button>
+            <button class="btn" onclick="appendNumber(6)">6</button>
+            <button class="btn" onclick="appendOperator('-')">-</button>
+
+            <button class="btn" onclick="appendNumber(1)">1</button>
+            <button class="btn" onclick="appendNumber(2)">2</button>
+            <button class="btn" onclick="appendNumber(3)">3</button>
+            <button class="btn" onclick="appendOperator('*')">*</button>
+
+            <button class="btn" onclick="appendNumber(0)">0</button>
+            <button class="btn" onclick="clearDisplay()">C</button>
+            <button class="btn" onclick="calculateResult()">=</button>
+            <button class="btn" onclick="appendOperator('/')">/</button>
+        </div>
+    </div>
+
+    <!-- Neon name displayed at the top-right corner -->
+    <div class="neon-text">Abhinav Parmar</div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function appendNumber(number) {
+            display.value += number;
+        }
+
+        function appendOperator(operator) {
+            display.value += ` ${operator} `;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                let result = eval(display.value);
+                display.value = Math.round(result * 1000000) / 1000000; // rounding to 6 decimal places
+            } catch {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
